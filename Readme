@@ -1,0 +1,26 @@
+1. I build this project on lastest-version flask server and local mongodb server
+   I develop and test this project on ubuntu 14.04
+
+2. how to run code:
+   1. you need to install mongodb, and bring up mongodb on default server and port
+	1. follow this link, if you do not know how to install and start mongodb
+	http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+	2. The default /etc/mongod.conf configuration file supplied by the 3.0 series packages has bind_ip set to 127.0.0.1 
+	by default. Modify this setting as needed for your environment before initializing a replica set.
+   2. you need to install flask framework
+        1. tutorial on how to install flask
+   3. after you install the above framework and data store, download the source code app.py and the file: listings.csv
+	open command line prompt and run: 
+		python app.py
+        now the server is running
+	open another command line prompt and run:
+		curl -i http://localhost:5000/listings?min_price=100000\&max_price=200000\&min_bed=2\&max_bed=5\&min_bath=2\&max_bath=5\&page=1\&per_page=30
+        or open a browser and type:
+		http://localhost:5000/listings?min_price=100000&max_price=200000&min_bed=2&max_bed=2&min_bath=2&max_bath=2&page=1&per_page=30
+	
+	the parameter: page indicate the page num you want, and per_page indicate how many items per page
+
+
+3. further improvement.
+	1.Pagination via web linking, for each request, my current implementation will filter out all the matched items and return items on the specific page num. I think that maybe server side could cache the filtered data to improve performance
+	2. I use raw database api: pymongo, maybe later I could use MongoEngine or Flask-SQLAlchemy extension for database
